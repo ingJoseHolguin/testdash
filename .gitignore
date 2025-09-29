@@ -1,0 +1,24 @@
+# Archivos de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.env
+
+# Base de datos SQLite
+*.db
+
+# Archivos de configuración de Streamlit
+.streamlit/
+
+# Archivos de logs
+*.log
+
+# Archivos de VSCode / IDEs
+.vscode/
+.idea/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db

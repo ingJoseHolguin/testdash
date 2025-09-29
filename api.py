@@ -21,19 +21,23 @@ init_db()
 
 @app.post("/captura")
 async def receive_data(request: Request):
-    body = await request.json()
-    
-    # Guardar en BD
+    try:
+        # Intentar leer como JSON
+        body = await request.json()
+        payload = json.dumps(body)
+    except Exception:
+        # Si no es JSON, leer como texto
+        body = await request.body()
+        payload = body.decode("utf-8")
+
+    # Guardar en BD (como texto plano)
     conn = sqlite3.connect("data.db")
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO data (payload) VALUES (?)", (json.dumps(body),))
+    cursor.execute("INSERT INTO data (payload) VALUES (?)", (payload,))
     conn.commit()
     conn.close()
 
     # Mostrar en terminal
-    print("Nueva petición recibida:", body)
+    print("Nueva petición recibida:", payload)
 
-    return {"status": "ok", "received": body}
-
-
-# pip install fastapi uvicorn streamlit pandas
+    return {"status": "ok", "received": payload}
