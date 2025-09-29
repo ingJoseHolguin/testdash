@@ -1,4 +1,4 @@
-pip install fastapi "uvicorn[standard]" pandas sqlalchemy streamlit plotly
+pip install fastapi uvicorn streamlit pandas
 
 py -m venv venv
 
